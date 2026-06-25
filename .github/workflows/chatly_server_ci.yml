@@ -14,9 +14,6 @@ jobs:
 
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      MONGO_URL: ${{ secrets.MONGO_URL }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       GITHUB_SHA: ${{ github.sha }}
 
     steps:
