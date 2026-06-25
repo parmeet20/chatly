@@ -9,7 +9,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/parmeet20/golang-chatapp/internal/auth"
 	"github.com/parmeet20/golang-chatapp/internal/config"
 	"github.com/parmeet20/golang-chatapp/internal/infra/database"
@@ -22,11 +21,11 @@ import (
 
 func main() {
 
-	err := godotenv.Load()
-	if err != nil {
-		slog.Error("failed to load environment variables", "error", err)
-		os.Exit(1)
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	slog.Error("failed to load environment variables", "error", err)
+	// 	os.Exit(1)
+	// }
 	cfg := config.LoadConfig()
 
 	db, err := database.NewDB(cfg.MONGO_URL, "chat-app")
