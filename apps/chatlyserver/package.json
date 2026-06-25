@@ -1,0 +1,14 @@
+{
+  "name": "chatlyserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "make build",
+    "start": "make run",
+    "dev": "make run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
