@@ -16,6 +16,10 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       GITHUB_SHA: ${{ github.sha }}
 
+    defaults:
+      run:
+        working-directory: apps/chatlyserver
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -35,7 +39,6 @@ jobs:
       run: make run-test
 
     - name: Build Docker image
-      working-directory: apps/chatlyserver
       run: make build-docker-image
 
     - name: Log in to Docker Hub
