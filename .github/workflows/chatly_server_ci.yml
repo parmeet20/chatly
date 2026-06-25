@@ -16,7 +16,10 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       GITHUB_SHA: ${{ github.sha }}
-      working-directory: apps/chatlyserver
+
+    defaults:
+      run:
+        working-directory: apps/chatlyserver
 
     steps:
     - name: Checkout repository
