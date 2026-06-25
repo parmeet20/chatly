@@ -22,7 +22,7 @@ run:
 
 build-docker-image:
 	@echo "Building chatly backend docker image"
-	docker build -t ${DOCKER_USERNAME}/chatly:${GITHUB_SHA} .
+	docker build -t ${DOCKER_USERNAME}/chatlyserver:${GITHUB_SHA} .
 	@echo "Building chatly backend docker image done"
 
 docker-run:

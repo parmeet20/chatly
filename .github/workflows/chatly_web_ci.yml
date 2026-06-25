@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/chatlyweb/**'
+      - '.github/workflows/chatly_web_ci.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'apps/chatlyweb/**'
+      - '.github/workflows/chatly_web_ci.yml'
 
 jobs:
   build-and-deploy:
