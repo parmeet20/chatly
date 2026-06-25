@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -26,7 +27,10 @@ func main() {
 	// 	slog.Error("failed to load environment variables", "error", err)
 	// 	os.Exit(1)
 	// }
-	cfg := config.LoadConfig()
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	db, err := database.NewDB(cfg.MONGO_URL, "chat-app")
 	if err != nil {

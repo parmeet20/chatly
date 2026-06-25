@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -15,44 +15,44 @@ type Config struct {
 	JWT_TOKEN_EXPIRATION_TIME time.Duration
 }
 
-func LoadConfig() *Config {
+func LoadConfig() (*Config, error) {
 	port := os.Getenv("PORT")
 	if port == "" {
-		log.Fatal("PORT environment variable is required")
+		return nil, fmt.Errorf("PORT is required")
 	}
 
 	mongoURL := os.Getenv("MONGO_URL")
 	if mongoURL == "" {
-		log.Fatal("MONGO_URL environment variable is required")
+		return nil, fmt.Errorf("MONGO_URL is required")
 	}
 
 	jwtSecret := os.Getenv("JWT_SECRET")
 	if jwtSecret == "" {
-		log.Fatal("JWT_SECRET environment variable is required")
+		return nil, fmt.Errorf("JWT_SECRET is required")
 	}
 
 	allowedOrigins := parseOrigins(os.Getenv("ALLOWED_ORIGINS"))
 	if len(allowedOrigins) == 0 {
-		log.Fatal("ALLOWED_ORIGINS environment variable is required")
+		return nil, fmt.Errorf("ALLOWED_ORIGINS is required")
 	}
 
 	jwtExpirationStr := os.Getenv("JWT_TOKEN_EXPIRATION_TIME")
 	if jwtExpirationStr == "" {
-		log.Fatal("JWT_TOKEN_EXPIRATION_TIME environment variable is required")
+		return nil, fmt.Errorf("JWT_TOKEN_EXPIRATION_TIME is required")
 	}
 
 	jwtExpiration, err := time.ParseDuration(jwtExpirationStr)
 	if err != nil {
-		log.Fatalf("Invalid JWT_TOKEN_EXPIRATION_TIME: %v", err)
+		return nil, fmt.Errorf("invalid JWT_TOKEN_EXPIRATION_TIME: %w", err)
 	}
 
 	return &Config{
 		PORT:                      port,
-		AllowedOrigins:            allowedOrigins,
 		MONGO_URL:                 mongoURL,
 		JWT_SECRET:                jwtSecret,
+		AllowedOrigins:            allowedOrigins,
 		JWT_TOKEN_EXPIRATION_TIME: jwtExpiration,
-	}
+	}, nil
 }
 
 func parseOrigins(origins string) []string {
